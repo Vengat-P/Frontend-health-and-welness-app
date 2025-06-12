@@ -5,8 +5,13 @@ const Register = () => {
     const navigate = useNavigate()
     const [userData,setUserData] = useState({
         name:"",
+        email:"",
         password:"",
-        
+        gender:"",
+        height:"",
+        weight:"",
+        age:"",
+
     })
     return (
         <div>

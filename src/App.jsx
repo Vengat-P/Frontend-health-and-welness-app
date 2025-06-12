@@ -13,11 +13,13 @@ import ResetPassword from "./Pages/ResetPassword";
 import { ToastContainer } from "react-toastify";
 import AdminDashboard from "./Admin/AdminDashboard";
 import { UserContext } from "./Context/UserContext";
+import About from "./Pages/About";
+import Footer from "./Components/Footer";
 
 const App = () => {
   const { user } = useContext(UserContext);
   useEffect(() => {
-  
+
   }, [user]);
   return (
     <>
@@ -32,6 +34,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/about" element={<About />} />
         <Route path="/fitness" element={<Fitness />} />
         <Route path="/Goal" element={<Goal />} />
         <Route path="/nutrition" element={<Nutrition />} />
@@ -48,6 +51,9 @@ const App = () => {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <div>
+        <Footer/>
+      </div>
     </>
   );
 };
