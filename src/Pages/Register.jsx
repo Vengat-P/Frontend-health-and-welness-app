@@ -13,20 +13,15 @@ const Register = () => {
     password: "",
     gender: "",
   });
-  const handleRegister = async(e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    await axios
-      .post(
-        "http://localhost:5000/api/auth/register", userData
-      )
-      .then((res) => {
-        toast.success(res.data.message);
-        navigate("/login");
-      })
-      .catch((error) => {
-        // console.log(error);
-        toast.error(error.response.data.message);
-      });
+    try {
+      await axios.post("http://localhost:5000/api/auth/register", userData);
+      toast.success("User Registered Succesfully");
+      navigate("/login");
+    } catch (error) {
+      toast.error("error in Register user");
+    }
   };
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100">
@@ -105,30 +100,12 @@ const Register = () => {
           </button>
         </div>
 
-        <p className="p-3 mb-6 flex gap-2  items-center">
-          <input
-            type="radio"
-            name="gender"
-            id="male"
-            value={"male"}
-            classname="w-full p-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onchange={(e) =>
-              setUserData({ ...userData, gender: e.target.value })
-            }
-          />
-          <label htmlFor="male ">Male</label>
-          <input
-            type="radio"
-            name="gender"
-            id="female"
-            value={"female"}
-            classname="w-full p-3 mb-6 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onchange={(e) =>
-              setUserData({ ...userData, gender: e.target.value })
-            }
-          />
-          <label htmlFor="female ">Female</label>
-        </p>
+        <input
+          type="text"
+          placeholder="Enter Your Gender"
+          className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          onChange={(e) => setUserData({ ...userData, gender: e.target.value })}
+        />
 
         <button
           type="submit"
