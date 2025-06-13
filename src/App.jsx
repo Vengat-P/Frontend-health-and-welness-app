@@ -16,6 +16,7 @@ import { UserContext } from "./Context/UserContext";
 import About from "./Pages/About";
 import Footer from "./Components/Footer";
 import PersonalDetails from "./Pages/PersonalDetails";
+import FitnessLogs from "./Pages/FitnessLogs";
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/about" element={<About />} />
         <Route path="/fitness" element={<Fitness />} />
+        <Route path="/fitnesslogs" element={<FitnessLogs/>}/>
         <Route path="/goal" element={<Goal />} />
         <Route path="/nutrition" element={<Nutrition />} />
         <Route path="/reset-password/:id/:token" element={<ResetPassword />} />

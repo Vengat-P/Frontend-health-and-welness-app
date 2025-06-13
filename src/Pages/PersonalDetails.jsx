@@ -12,7 +12,7 @@ const PersonalDetails = () => {
   const [userData, setUserData] = useState({});
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [user,navigate]);
   const fetchData = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/auth/getUser", {
