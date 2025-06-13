@@ -15,6 +15,7 @@ import AdminDashboard from "./Admin/AdminDashboard";
 import { UserContext } from "./Context/UserContext";
 import About from "./Pages/About";
 import Footer from "./Components/Footer";
+import PersonalDetails from "./Pages/PersonalDetails";
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -31,12 +32,13 @@ const App = () => {
       </div>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/personaldetails" element={<PersonalDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/about" element={<About />} />
         <Route path="/fitness" element={<Fitness />} />
-        <Route path="/Goal" element={<Goal />} />
+        <Route path="/goal" element={<Goal />} />
         <Route path="/nutrition" element={<Nutrition />} />
         <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
         <Route
