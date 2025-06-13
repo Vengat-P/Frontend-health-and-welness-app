@@ -6,22 +6,22 @@ const Home = () => {
   const handleLocate = () => {
     navigate("/personaldetails");
   };
-  const handleChange = ()=>{
+  const handleChange = () => {
     navigate("/fitness");
-  }
+  };
   return (
     <div className="flex justify-around">
       <button
         type="button"
         onClick={handleLocate}
-        className="p-2 bg-gray-600 rounded-lg text-white"
+        className="p-2 bg-gray-600 rounded-lg cursor-pointer text-white"
       >
         My Fitness Info
       </button>
       <button
         type="button"
         onClick={handleChange}
-        className=" flex p-2 bg-gray-600 rounded-lg text-white"
+        className=" flex p-2 bg-gray-600 rounded-lg cursor-pointer text-white"
       >
         <svg
           className="w-6 h-6 text-gray-800 dark:text-white"

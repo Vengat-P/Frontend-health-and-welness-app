@@ -17,6 +17,7 @@ import About from "./Pages/About";
 import Footer from "./Components/Footer";
 import PersonalDetails from "./Pages/PersonalDetails";
 import FitnessLogs from "./Pages/FitnessLogs";
+import FrontPage from "./Pages/FrontPage";
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -32,7 +33,8 @@ const App = () => {
         <Navbar />
       </div>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<FrontPage />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/personaldetails" element={<PersonalDetails />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

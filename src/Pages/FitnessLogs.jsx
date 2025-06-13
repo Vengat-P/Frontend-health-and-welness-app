@@ -7,7 +7,8 @@ import axios from "axios";
 const FitnessLogs = () => {
   const { user } = useContext(UserContext);
   const [fitnessLogs, setFitnessLogs] = useState([]);
-  const[status,setStatus] = useState(true)
+  const [newFitnessLog, setNewFitnessLog] = useState({});
+  const [status, setStatus] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     fetchData();
@@ -25,21 +26,55 @@ const FitnessLogs = () => {
       console.log(error);
     }
   };
-  const handleEdit = ()=>{
-    
-  }
-  const handleDelete = async(id)=>{
-try {
-      const res = await axios.delete(`http://localhost:5000/api/fitnesses/delete/${id}`,{
+  const handleEdit = async (id) => {
+    document.getElementById("my_modal_1").showModal();
+    try {
+      const res = await axios.get(
+        `http://localhost:5000/api/fitnesses/getlog/${id}`,
+        {
           headers: { Authorization: `Bearer ${user.token}` },
-        }) 
-        const filtered = fitnessLogs.filter((f)=>f._id !== id)
-        setFitnessLogs(filtered)
-        toast.success("Log Deleted Successfully") 
+        }
+      );
+      setNewFitnessLog(res.data.data);
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
-  }
+  };
+  const handleUpdate = async (id, e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.put(
+        `http://localhost:5000/api/fitnesses/update/${id}`,
+        newFitnessLog,
+        {
+          headers: { Authorization: `Bearer ${user.token}` },
+        }
+      );
+      const updated = fitnessLogs.map((f) =>
+        f._id === id ? res.data.data : f
+      );
+      setFitnessLogs(updated);
+      setNewFitnessLog({ exercises: "", duration: "", distance: "" });
+      navigate("/fitnesslogs");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleDelete = async (id) => {
+    try {
+      const res = await axios.delete(
+        `http://localhost:5000/api/fitnesses/delete/${id}`,
+        {
+          headers: { Authorization: `Bearer ${user.token}` },
+        }
+      );
+      const filtered = fitnessLogs.filter((f) => f._id !== id);
+      setFitnessLogs(filtered);
+      toast.success("Log Deleted Successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="flex grid-cols-4 gap-3">
       {fitnessLogs.map((logs, index) => {
@@ -65,10 +100,10 @@ try {
               {logs.createdAt}
             </h1>
             <div className="flex justify-end gap-3">
+              {/* Open the modal using document.getElementById('ID').showModal() method */}
               <button
-                type="button"
-                onClick={handleEdit}
-                className="p-3 flex m-2 w-auto cursor-pointer text-white rounded-lg bg-blue-600"
+                className="btn p-3 flex m-2 w-auto cursor-pointer text-white rounded-lg bg-blue-600"
+                onClick={() => handleEdit(logs._id)}
               >
                 <svg
                   className="w-6 h-6 text-gray-800 dark:text-white"
@@ -89,7 +124,70 @@ try {
                 </svg>
                 Edit
               </button>
-              <button type="button"className="p-3 flex m-2 w-auto text-white cursor-pointer rounded-lg bg-red-600" onClick={()=>handleDelete(logs._id)}>Delete</button>
+              <dialog id="my_modal_1" className="modal">
+                <div className="modal-box">
+                  <div className="modal-action">
+                    <form
+                      method="dialog"
+                      onSubmit={(e) => handleUpdate(newFitnessLog._id, e)}
+                    >
+                      {/* if there is a button in form, it will close the modal */}
+                      <input
+                        type="text"
+                        placeholder="Enter Exercise Name"
+                        value={newFitnessLog.exercises}
+                        className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        onChange={(e) =>
+                          setNewFitnessLog({
+                            ...newFitnessLog,
+                            exercises: e.target.value,
+                          })
+                        }
+                      />
+                      <input
+                        type="tel"
+                        placeholder="Enter Duration In Mintues"
+                        value={newFitnessLog.duration}
+                        className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        onChange={(e) =>
+                          setNewFitnessLog({
+                            ...newFitnessLog,
+                            duration: e.target.value,
+                          })
+                        }
+                      />
+                      <input
+                        type="tel"
+                        placeholder="Enter Distance in KM"
+                        value={newFitnessLog.distance}
+                        className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        onChange={(e) =>
+                          setNewFitnessLog({
+                            ...newFitnessLog,
+                            distance: e.target.value,
+                          })
+                        }
+                      />
+                      <button
+                        className="btn"
+                        type="submit"
+                        onClick={() =>
+                          document.getElementById("my_modal_1").close()
+                        }
+                      >
+                        Update
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </dialog>
+              <button
+                type="button"
+                className="p-3 flex m-2 w-auto text-white cursor-pointer rounded-lg bg-red-600"
+                onClick={() => handleDelete(logs._id)}
+              >
+                Delete
+              </button>
             </div>
           </div>
         );

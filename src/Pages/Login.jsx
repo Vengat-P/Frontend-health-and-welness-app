@@ -22,7 +22,7 @@ const Login = () => {
       login(userData);
       localStorage.setItem("user", JSON.stringify(userData));
       toast.success("LoggedIn Succesfully");
-      navigate(userData.role?.toLowerCase() === "admin" ? "/admin" : "/");
+      navigate(userData.role?.toLowerCase() === "admin" ? "/admin" : "/home");
     } catch (error) {
       toast.error("Invalid Credentials");
     }
