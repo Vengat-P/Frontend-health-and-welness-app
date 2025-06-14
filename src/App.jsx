@@ -18,12 +18,11 @@ import Footer from "./Components/Footer";
 import PersonalDetails from "./Pages/PersonalDetails";
 import FitnessLogs from "./Pages/FitnessLogs";
 import FrontPage from "./Pages/FrontPage";
+import NutritionLogs from "./Pages/NutritionLogs";
 
 const App = () => {
   const { user } = useContext(UserContext);
-  useEffect(() => {
-
-  }, [user]);
+  useEffect(() => {}, [user]);
   return (
     <>
       <div>
@@ -41,7 +40,8 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/about" element={<About />} />
         <Route path="/fitness" element={<Fitness />} />
-        <Route path="/fitnesslogs" element={<FitnessLogs/>}/>
+        <Route path="/fitnesslogs" element={<FitnessLogs />} />
+        <Route path="/nutritionlogs" element={<NutritionLogs />} />
         <Route path="/goal" element={<Goal />} />
         <Route path="/nutrition" element={<Nutrition />} />
         <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
@@ -58,7 +58,7 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <div>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );

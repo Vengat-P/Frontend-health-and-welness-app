@@ -58,43 +58,46 @@ const Navbar = () => {
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
           id="navbar-user"
         >
-          
-            {user ? (
-              <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
-              <Link
-                to="/home"
-                className=" py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+          {user ? (
+            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+              <li>
+                <Link
+                  to="/home"
+                  className=" py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/fitnesslogs"
+                  className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Fitness logs
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/nutritionlogs"
+                  className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Nutrion Logs
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/goal"
+                  className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  aria-current="page"
+                >
+                  Goals
+                </Link>
+              </li>
+              <button
+                type="button"
+                className="flex border bg-red-600 cursor-pointer rounded-lg p-1 text-white "
+                onClick={handleLogout}
               >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/fitnesslogs"
-                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Fitness logs
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/nutrition"
-                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                Nutrion Logs
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/goal"
-                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-                aria-current="page"
-              >
-                Goals
-              </Link>
-            </li>
-              <button type="button" className="flex border bg-red-600 cursor-pointer rounded-lg p-1 text-white " onClick={handleLogout}>
                 <span>Logout</span>
                 <svg
                   className="w-6 h-6 text-gray-800 dark:text-white"
@@ -114,16 +117,16 @@ const Navbar = () => {
                   />
                 </svg>
               </button>
-              </ul>
-            ) : (
-              <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
-              <Link
-                to="/about"
-                className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-              >
-                About
-              </Link>
+            </ul>
+          ) : (
+            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+              <li>
+                <Link
+                  to="/about"
+                  className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  About
+                </Link>
               </li>
               <li>
                 <Link
@@ -132,8 +135,8 @@ const Navbar = () => {
                 >
                   Register
                 </Link>
-                </li>
-                <li>
+              </li>
+              <li>
                 <Link
                   to="/login"
                   className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
@@ -141,8 +144,8 @@ const Navbar = () => {
                   Login
                 </Link>
               </li>
-              </ul>
-            )}
+            </ul>
+          )}
         </div>
       </div>
     </nav>

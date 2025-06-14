@@ -3,11 +3,10 @@ import { UserContext } from "../Context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-
-const FitnessLogs = () => {
+const NutritionLogs = () => {
   const { user } = useContext(UserContext);
-  const [fitnessLogs, setFitnessLogs] = useState([]);
-  const [newFitnessLog, setNewFitnessLog] = useState({});
+  const [nutritionLogs, setNutritionLogs] = useState([]);
+  const [newNutritionLog, setNewNutritionLog] = useState({});
   const navigate = useNavigate();
   useEffect(() => {
     fetchData();
@@ -15,12 +14,12 @@ const FitnessLogs = () => {
   const fetchData = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/fitnesses/getfitnesslogs",
+        "http://localhost:5000/api/nutritions/getnutritionlogs",
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }
       );
-      setFitnessLogs(res.data.data);
+      setNutritionLogs(res.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -29,12 +28,12 @@ const FitnessLogs = () => {
     document.getElementById("my_modal_1").showModal();
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/fitnesses/getlog/${id}`,
+        `http://localhost:5000/api/nutritions/getlog/${id}`,
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }
       );
-      setNewFitnessLog(res.data.data);
+      setNewNutritionLog(res.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -43,18 +42,25 @@ const FitnessLogs = () => {
     e.preventDefault();
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/fitnesses/update/${id}`,
-        newFitnessLog,
+        `http://localhost:5000/api/nutritions/update/${id}`,
+        newNutritionLog,
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }
       );
-      const updated = fitnessLogs.map((f) =>
+      const updated = nutritionLogs.map((f) =>
         f._id === id ? res.data.data : f
       );
-      setFitnessLogs(updated);
-      setNewFitnessLog({ exercises: "", duration: "", distance: "" });
-      navigate("/fitnesslogs");
+      setNutritionLogs(updated);
+      setNewNutritionLog({
+        food: "",
+        carbohydrate: "",
+        protein: "",
+        fat: "",
+        vitamin: "",
+        minerals: "",
+      });
+      navigate("/nutritionlogs");
     } catch (error) {
       console.log(error);
     }
@@ -62,13 +68,13 @@ const FitnessLogs = () => {
   const handleDelete = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:5000/api/fitnesses/delete/${id}`,
+        `http://localhost:5000/api/nutritions/delete/${id}`,
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }
       );
-      const filtered = fitnessLogs.filter((f) => f._id !== id);
-      setFitnessLogs(filtered);
+      const filtered = nutritionLogs.filter((f) => f._id !== id);
+      setNutritionLogs(filtered);
       toast.success("Log Deleted Successfully");
     } catch (error) {
       console.log(error);
@@ -76,22 +82,38 @@ const FitnessLogs = () => {
   };
   return (
     <div className="flex grid-cols-4 gap-3">
-      {fitnessLogs.map((logs, index) => {
+      {nutritionLogs.map((logs, index) => {
         return (
           <div
             key={index}
             className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
           >
             <h1 className="text-xl font-bold">
-              <span className="text-xl font-medium ">Exercise Name : </span>
-              {logs.exercises}
+              <span className="text-xl font-medium ">Food Name : </span>
+              {logs.food}
             </h1>
             <h1 className="text-xl font-bold">
-              <span className="text-xl font-medium ">Duration : </span>
-              {logs.duration}
+              <span className="text-xl font-medium ">Carbohydrate in g : </span>
+              {logs.carbohydrate}
             </h1>
             <h1 className="text-xl font-bold">
-              <span className="text-xl font-medium ">Calories Burn : </span>
+              <span className="text-xl font-medium ">Protein in g : </span>
+              {logs.protein}
+            </h1>
+            <h1 className="text-xl font-bold">
+              <span className="text-xl font-medium ">Fat in g : </span>
+              {logs.fat}
+            </h1>
+            <h1 className="text-xl font-bold">
+              <span className="text-xl font-medium ">Vitamins : </span>
+              {logs.vitamin}
+            </h1>
+            <h1 className="text-xl font-bold">
+              <span className="text-xl font-medium ">Minerals : </span>
+              {logs.minerals}
+            </h1>
+            <h1 className="text-xl font-bold">
+              <span className="text-xl font-medium ">Calories Taken : </span>
               {logs.calories}
             </h1>
             <h1 className="text-xl font-bold">
@@ -128,42 +150,78 @@ const FitnessLogs = () => {
                   <div className="modal-action">
                     <form
                       method="dialog"
-                      onSubmit={(e) => handleUpdate(newFitnessLog._id, e)}
+                      onSubmit={(e) => handleUpdate(newNutritionLog._id, e)}
                     >
                       {/* if there is a button in form, it will close the modal */}
                       <input
                         type="text"
-                        placeholder="Enter Exercise Name"
-                        value={newFitnessLog.exercises}
+                        placeholder="Enter food Name"
+                        value={newNutritionLog.food}
                         className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         onChange={(e) =>
-                          setNewFitnessLog({
-                            ...newFitnessLog,
-                            exercises: e.target.value,
+                          setNewNutritionLog({
+                            ...newNutritionLog,
+                            food: e.target.value,
                           })
                         }
                       />
                       <input
                         type="tel"
-                        placeholder="Enter Duration In Mintues"
-                        value={newFitnessLog.duration}
+                        placeholder="Enter carbohydrate In g"
+                        value={newNutritionLog.carbohydrate}
                         className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         onChange={(e) =>
-                          setNewFitnessLog({
-                            ...newFitnessLog,
-                            duration: e.target.value,
+                          setNewNutritionLog({
+                            ...newNutritionLog,
+                            carbohydrate: e.target.value,
                           })
                         }
                       />
                       <input
                         type="tel"
-                        placeholder="Enter Distance in KM"
-                        value={newFitnessLog.distance}
+                        placeholder="Enter protein in g"
+                        value={newNutritionLog.protein}
                         className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         onChange={(e) =>
-                          setNewFitnessLog({
-                            ...newFitnessLog,
-                            distance: e.target.value,
+                          setNewNutritionLog({
+                            ...newNutritionLog,
+                            protein: e.target.value,
+                          })
+                        }
+                      />
+                      <input
+                        type="tel"
+                        placeholder="Enter fat in g"
+                        value={newNutritionLog.fat}
+                        className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        onChange={(e) =>
+                          setNewNutritionLog({
+                            ...newNutritionLog,
+                            fat: e.target.value,
+                          })
+                        }
+                      />
+                      <input
+                        type="text"
+                        placeholder="Enter vitamins Name"
+                        value={newNutritionLog.vitamin}
+                        className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        onChange={(e) =>
+                          setNewNutritionLog({
+                            ...newNutritionLog,
+                            vitamin: e.target.value,
+                          })
+                        }
+                      />
+                      <input
+                        type="text"
+                        placeholder="Enter minerals Name"
+                        value={newNutritionLog.minerals}
+                        className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        onChange={(e) =>
+                          setNewNutritionLog({
+                            ...newNutritionLog,
+                            minerals: e.target.value,
                           })
                         }
                       />
@@ -195,4 +253,4 @@ const FitnessLogs = () => {
   );
 };
 
-export default FitnessLogs;
+export default NutritionLogs;
