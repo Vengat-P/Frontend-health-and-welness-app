@@ -59,6 +59,7 @@ const NutritionLogs = () => {
         fat: "",
         vitamin: "",
         minerals: "",
+        nutritiongoal: "",
       });
       navigate("/nutritionlogs");
     } catch (error) {
@@ -115,6 +116,10 @@ const NutritionLogs = () => {
             <h1 className="text-xl font-bold">
               <span className="text-xl font-medium ">Calories Taken : </span>
               {logs.calories}
+            </h1>
+            <h1 className="text-xl font-bold">
+              <span className="text-xl font-medium ">Nutrition Goal : </span>
+              {logs.nutritiongoal}
             </h1>
             <h1 className="text-xl font-bold">
               <span className="text-xl font-medium ">Date : </span>
@@ -225,6 +230,20 @@ const NutritionLogs = () => {
                           })
                         }
                       />
+                      <select
+                        onChange={(e) =>
+                          setNewNutritionLog({
+                            ...newNutritionLog,
+                            nutritiongoal: e.target.value,
+                          })
+                        }
+                        value={newNutritionLog.nutritiongoal}
+                        className="border p-2 mt-2 mb-4 rounded w-full"
+                      >
+                        <option value="select">Select Goal</option>
+                        <option value="muscle gain">muscle gain</option>
+                        <option value="weight lose">weight lose</option>
+                      </select>
                       <button
                         className="btn"
                         type="submit"

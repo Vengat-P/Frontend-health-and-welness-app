@@ -1,8 +1,99 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../Context/UserContext";
+import axios from "axios";
+import BarChart from "../Chart/BarChart";
+
 
 const Home = () => {
+      const { user } = useContext(UserContext)
   const navigate = useNavigate();
+  const [nutritionLogs, setNutritionLogs] = useState([]);
+    const [fitnessLogs, setFitnessLogs] = useState([]);
+     const [chartData, setChartData] = useState({
+        labels: [],
+        datasets: [
+          {
+            label: 'Calories burn',
+            data: [],
+            backgroundColor: [
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+            ],
+            borderColor: 'rgba(0, 0, 0, 1)',
+            borderWidth: 1,
+          },{
+            label: 'calories taken',
+            data: [],
+            backgroundColor: [
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+            ],
+            borderColor: 'rgba(0, 0, 0, 1)',
+            borderWidth: 1,
+          },
+        ],
+      });
+   useEffect(() => {
+    fetchData();
+  }, [user]);
+  const fetchData = async () => {
+    try {
+      const res1 = await axios.get(
+        "http://localhost:5000/api/fitnesses/getfitnesslogs",
+        {
+          headers: { Authorization: `Bearer ${user.token}` },
+        }
+      );
+      const res2 = await axios.get(
+        "http://localhost:5000/api/nutritions/getnutritionlogs",
+        {
+          headers: { Authorization: `Bearer ${user.token}` },
+        }
+      );
+      
+      setFitnessLogs(res1.data.data);
+      setNutritionLogs(res2.data.data);
+      setChartData({
+        labels: ['20-06-2025','25-06-2025'],
+        datasets: [
+          {
+            label: 'Calories burn',
+            data: [fitnessLogs.map(item => item.calories)],
+            backgroundColor: [
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+            ],
+            borderColor: 'rgba(0, 0, 0, 1)',
+            borderWidth: 1,
+          },{
+            label: 'calories taken',
+            data: [nutritionLogs.map(item => item.calories)],
+            backgroundColor: [
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+            ],
+            borderColor: 'rgba(0, 0, 0, 1)',
+            borderWidth: 1,
+          },
+        ],
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleLocate = () => {
     navigate("/personaldetails");
   };
@@ -13,7 +104,11 @@ const Home = () => {
     navigate("/nutrition");
   };
   return (
-    <div className="flex justify-around">
+    <>
+          <div className="w-3/4">
+            <BarChart chartData={chartData} />
+          </div>
+        <div className="flex justify-around">
       <button
         type="button"
         onClick={handleLocate}
@@ -72,6 +167,8 @@ const Home = () => {
         <p>Nutrition Log</p>
       </button>
     </div>
+    </>
+
   );
 };
 

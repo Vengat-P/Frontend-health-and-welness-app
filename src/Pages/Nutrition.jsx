@@ -15,6 +15,7 @@ const Nutrition = () => {
     fat: "",
     vitamin: "",
     minerals: "",
+    nutritiongoal: "",
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,6 +86,17 @@ const Nutrition = () => {
             setUserData({ ...userData, minerals: e.target.value })
           }
         />
+        <select
+          onChange={(e) =>
+            setUserData({ ...userData, nutritiongoal: e.target.value })
+          }
+          required
+          className="border p-2 mt-2 mb-4 rounded w-full"
+        >
+          <option value="select">Select Goal</option>
+          <option value="muscle gain">muscle gain</option>
+          <option value="weight lose">weight lose</option>
+        </select>
         <button
           type="submit"
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300"

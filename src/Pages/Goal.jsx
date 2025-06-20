@@ -8,7 +8,8 @@ const Goal = () => {
     const { user } = useContext(UserContext);
       const navigate = useNavigate();
       const [userData, setUserData] = useState({
-        goal: "",
+        from: "",
+        to:"",
       });
 
       const handleSubmit = async(e)=>{
@@ -31,7 +32,22 @@ const Goal = () => {
         <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
           Hey what's your plan
         </h2>
-        <select
+        <input
+                  type="date"
+                  className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onChange={(e) =>
+                    setUserData({ ...userData, from: e.target.value })
+                  }
+                />
+                <input
+                  type="date"
+                  placeholder="Enter Duration in Minutes"
+                  className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onChange={(e) =>
+                    setUserData({ ...userData, to: e.target.value })
+                  }
+                />
+        {/* <select
                   onChange={(e) =>
             setUserData({ ...userData, goal: e.target.value })
           }
@@ -40,7 +56,7 @@ const Goal = () => {
                   <option value="select">Select Goal</option>
                   <option value="muscle gain">muscle gain</option>
                   <option value="weight lose">weight lose</option>
-                </select>
+                </select> */}
         <button
           type="submit"
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300"
