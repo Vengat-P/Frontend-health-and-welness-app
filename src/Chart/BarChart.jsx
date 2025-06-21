@@ -6,14 +6,14 @@ ChartJS.register(CategoryScale,LinearScale,BarElement,Title,Tooltip,Legend)
 const BarChart = ({chartData}) => {
     return (
         <div>
-            <h2 style={{ textAlign: 'center' }}>Bar Chart</h2>
+            <h2 style={{ textAlign: 'center' }}>Tracking Report</h2>
           <Bar
             data={chartData}
             options={{
               plugins: {
                 title: {
                   display: true,
-                  text: 'Calories per Day',
+                  text: 'Calories per Day  ',
                 },
                 legend: {
                   display: true,

@@ -9,6 +9,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [nutritionLogs, setNutritionLogs] = useState([]);
   const [fitnessLogs, setFitnessLogs] = useState([]);
+  const [userData, setUserData] = useState({});
   //set date ranges to show chart
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -19,26 +20,14 @@ const Home = () => {
       {
         label: "Calories burn",
         data: [],
-        backgroundColor: [
-          "rgba(75, 192, 192, 0.6)",
-          "rgba(153, 102, 255, 0.6)",
-          "rgba(255, 159, 64, 0.6)",
-          "rgba(255, 99, 132, 0.6)",
-          "rgba(54, 162, 235, 0.6)",
-        ],
+        backgroundColor: [],
         borderColor: "rgba(0, 0, 0, 1)",
         borderWidth: 1,
       },
       {
         label: "calories taken",
         data: [],
-        backgroundColor: [
-          "rgba(75, 192, 192, 0.6)",
-          "rgba(153, 102, 255, 0.6)",
-          "rgba(255, 159, 64, 0.6)",
-          "rgba(255, 99, 132, 0.6)",
-          "rgba(54, 162, 235, 0.6)",
-        ],
+        backgroundColor: [],
         borderColor: "rgba(0, 0, 0, 1)",
         borderWidth: 1,
       },
@@ -46,7 +35,6 @@ const Home = () => {
   });
   useEffect(() => {
     fetchData();
-
   }, [user, datesRange]);
   const fetchData = async () => {
     try {
@@ -62,47 +50,59 @@ const Home = () => {
           headers: { Authorization: `Bearer ${user.token}` },
         }
       );
+      const res3 = await axios.get("http://localhost:5000/api/auth/getUser", {
+        headers: { Authorization: `Bearer ${user.token}` },
+      });
+      setUserData(res3.data.data);
       setFitnessLogs(res1.data.data);
       setNutritionLogs(res2.data.data);
       setChartData({
-            labels: datesRange.map((item)=>new Date(item).toISOString().split('T')[0]),
-    datasets: [
-      {
-        label: "Calories burn",
-        data: datesRange.map((date)=>{
-          if(new Date(date).toISOString() == fitnessLogs.forEach((item)=>item.createdAt)) {
-            
-            return fitnessLogs.map((item)=>item.calories)
-          }
-          else{
-            return 0
-          }
-        }),
-        backgroundColor: [
-          "rgba(75, 192, 192, 0.6)",
-          "rgba(153, 102, 255, 0.6)",
-          "rgba(255, 159, 64, 0.6)",
-          "rgba(255, 99, 132, 0.6)",
-          "rgba(54, 162, 235, 0.6)",
+        labels: datesRange.map(
+          (item) => new Date(item).toISOString().split("T")[0]
+        ),
+        datasets: [
+          {
+            label: "Calories burn(Your BMR + activities)",
+            data: datesRange.map((date) => {
+              const match = fitnessLogs.map((log) => {
+                if (
+                  log.createdAt.split("T")[0] ==
+                  date.toISOString().split("T")[0]
+                ) {
+                  return log.calories;
+                } else {
+                  return 0;
+                }
+              });
+              //calories burn through activities and rest mode calories burn general level
+              return match.reduce((acc, sum) => acc + sum, 0) + userData.bmr;
+            }),
+            backgroundColor: ["rgba(255, 0, 0, 0.61)"],
+            borderColor: "rgba(0, 0, 0, 1)",
+            borderWidth: 1,
+          },
+          {
+            label: "calories taken",
+            data: datesRange.map((date) => {
+              const match = nutritionLogs.map((log) => {
+                if (
+                  log.createdAt.split("T")[0] ==
+                  date.toISOString().split("T")[0]
+                ) {
+                  return log.calories;
+                } else {
+                  return 0;
+                }
+              });
+              console.log(match);
+              return match.reduce((acc, sum) => acc + sum, 0);
+            }),
+            backgroundColor: ["rgba(0, 0, 245, 0.8)"],
+            borderColor: "rgba(0, 0, 0, 1)",
+            borderWidth: 1,
+          },
         ],
-        borderColor: "rgba(0, 0, 0, 1)",
-        borderWidth: 1,
-      },
-      {
-        label: "calories taken",
-        data: [],
-        backgroundColor: [
-          "rgba(75, 192, 192, 0.6)",
-          "rgba(153, 102, 255, 0.6)",
-          "rgba(255, 159, 64, 0.6)",
-          "rgba(255, 99, 132, 0.6)",
-          "rgba(54, 162, 235, 0.6)",
-        ],
-        borderColor: "rgba(0, 0, 0, 1)",
-        borderWidth: 1,
-      },
-    ],
-      })
+      });
     } catch (error) {
       console.log(error);
     }
@@ -116,8 +116,8 @@ const Home = () => {
   const handleChangeNutrition = () => {
     navigate("/nutrition");
   };
-  console.log(startDate)
-  console.log(endDate)
+  console.log(startDate);
+  console.log(endDate);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (startDate && endDate) {
@@ -139,26 +139,25 @@ const Home = () => {
     <>
       <div className="flex w-fit">
         <form onSubmit={handleSubmit} className="flex">
- <input
-          type="date"
-          className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          onChange={(e) => setStartDate(new Date(e.target.value))}
-        />
-        <input
-          type="date"
-          className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          onChange={(e) => setEndDate(new Date(e.target.value))}
-        />
+          <input
+            type="date"
+            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={(e) => setStartDate(new Date(e.target.value))}
+          />
+          <input
+            type="date"
+            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={(e) => setEndDate(new Date(e.target.value))}
+          />
           <button
-          type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300"
-        >
-          Load
-        </button>
+            type="submit"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300"
+          >
+            Load
+          </button>
         </form>
-       
       </div>
-      <div className="w-3/4">
+      <div className="sm:w-full sm:h-full md:w-3/4">
         <BarChart chartData={chartData} />
       </div>
       <div className="flex justify-around">
