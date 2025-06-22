@@ -116,8 +116,6 @@ const Home = () => {
   const handleChangeNutrition = () => {
     navigate("/nutrition");
   };
-  console.log(startDate);
-  console.log(endDate);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (startDate && endDate) {
@@ -134,44 +132,21 @@ const Home = () => {
       setDatesRange([]);
     }
   };
-  console.log(datesRange);
+  // console.log(datesRange);
   return (
     <>
-      <div className="flex w-fit">
-        <form onSubmit={handleSubmit} className="flex">
-          <input
-            type="date"
-            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onChange={(e) => setStartDate(new Date(e.target.value))}
-          />
-          <input
-            type="date"
-            className="w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onChange={(e) => setEndDate(new Date(e.target.value))}
-          />
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-300"
-          >
-            Load
-          </button>
-        </form>
-      </div>
-      <div className="sm:w-full sm:h-full md:w-3/4">
-        <BarChart chartData={chartData} />
-      </div>
-      <div className="flex justify-around">
+          <div className="sm:grid sm:gap-2 md:flex justify-around mt-3 p-4 mx-auto my-auto border-2 border-gray-600">
         <button
           type="button"
           onClick={handleLocate}
-          className="p-2 bg-gray-600 rounded-lg cursor-pointer text-white"
+          className="p-2 bg-blue-600 rounded-lg cursor-pointer text-white"
         >
           My Fitness Info
         </button>
         <button
           type="button"
           onClick={handleChangeFitness}
-          className=" flex p-2 bg-gray-600 rounded-lg cursor-pointer text-white"
+          className=" flex p-2 bg-blue-600 rounded-lg cursor-pointer text-white"
         >
           <svg
             className="w-6 h-6 text-gray-800 dark:text-white"
@@ -196,7 +171,7 @@ const Home = () => {
         <button
           type="button"
           onClick={handleChangeNutrition}
-          className=" flex p-2 bg-gray-600 rounded-lg cursor-pointer text-white"
+          className=" flex p-2 bg-blue-600 rounded-lg cursor-pointer text-white"
         >
           <svg
             className="w-6 h-6 text-gray-800 dark:text-white"
@@ -219,6 +194,46 @@ const Home = () => {
           <p>Nutrition Log</p>
         </button>
       </div>
+      <div className="flex  justify-center mt-2 ">
+        <form onSubmit={handleSubmit} className="flex gap-2 justify-center">
+          <input
+            type="date"
+            
+            className="w-full p-3 mb-4 border cursor-pointer border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={(e) => setStartDate(new Date(e.target.value))}
+          />
+          <input
+            type="date"
+            className="w-full p-3 mb-4 cursor-pointer border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={(e) => setEndDate(new Date(e.target.value))}
+          />
+          <button
+            type="submit"
+            className="w-24 h-12 border cursor-pointer flex justify-center items-center bg-gray-100"
+          >
+            <svg
+              className="w-6 h-6 text-gray-800 dark:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width={24}
+              height={24}
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeWidth={2}
+                d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
+              />
+            </svg>
+          </button>
+        </form>
+      </div>
+      <div className="sm:w-full  md:w-3/4  mx-auto ">
+        <BarChart chartData={chartData} />
+      </div>
+
     </>
   );
 };
