@@ -44,7 +44,7 @@ const App = () => {
         <Route path="/fitnesslogs" element={<FitnessLogs />} />
         <Route path="/nutritionlogs" element={<NutritionLogs />} />
         <Route path="/setgoal" element={<SetGoal/>}/>
-        <Route path="/goal" element={<Goal />} />
+        <Route path="/goals" element={<Goal />} />
         <Route path="/nutrition" element={<Nutrition />} />
         <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
         <Route

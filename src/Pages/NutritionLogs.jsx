@@ -259,7 +259,7 @@ const NutritionLogs = () => {
               </dialog>
               <button
                 type="button"
-                className="p-3 flex m-2 w-auto text-white cursor-pointer rounded-lg bg-red-600"
+                className="btn p-3 flex m-2 w-auto text-white cursor-pointer rounded-lg bg-red-600"
                 onClick={() => handleDelete(logs._id)}
               >
                 Delete
