@@ -135,18 +135,18 @@ const Home = () => {
   // console.log(datesRange);
   return (
     <>
-          <div className="sm:grid sm:gap-2 md:flex justify-around mt-3 p-4 mx-auto my-auto border-2 border-gray-600">
+      <div className="sm:grid  md:flex justify-around  border-2 mt-3 p-4 mx-auto my-auto shadow-lg">
         <button
           type="button"
           onClick={handleLocate}
-          className="p-2 bg-blue-600 rounded-lg cursor-pointer text-white"
+          className="p-2 bg-gray-600 rounded-lg cursor-pointer text-white"
         >
           Personal Info
         </button>
         <button
           type="button"
           onClick={handleChangeFitness}
-          className=" flex p-2 bg-blue-600 rounded-lg cursor-pointer text-white"
+          className=" flex p-2 bg-gray-600 rounded-lg cursor-pointer text-white"
         >
           <svg
             className="w-6 h-6 text-gray-800 dark:text-white"
@@ -171,7 +171,7 @@ const Home = () => {
         <button
           type="button"
           onClick={handleChangeNutrition}
-          className=" flex p-2 bg-blue-600 rounded-lg cursor-pointer text-white"
+          className=" flex p-2 bg-gray-600 rounded-lg cursor-pointer text-white"
         >
           <svg
             className="w-6 h-6 text-gray-800 dark:text-white"
@@ -195,8 +195,10 @@ const Home = () => {
         </button>
         <button
           type="button"
-          onClick={(e)=>{navigate("/setgoal")}}
-          className=" flex p-2 bg-blue-600 rounded-lg cursor-pointer text-white"
+          onClick={(e) => {
+            navigate("/setgoal");
+          }}
+          className=" flex p-2 bg-gray-600 rounded-lg cursor-pointer text-white"
         >
           <svg
             className="w-6 h-6 text-gray-800 dark:text-white"
@@ -220,10 +222,9 @@ const Home = () => {
         </button>
       </div>
       <div className="flex  justify-center mt-2 ">
-        <form onSubmit={handleSubmit} className="flex gap-2 justify-center">
+        <form onSubmit={handleSubmit} className="sm:grid md:flex gap-2 justify-center">
           <input
             type="date"
-            
             className="w-full p-3 mb-4 border cursor-pointer border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             onChange={(e) => setStartDate(new Date(e.target.value))}
           />
@@ -234,10 +235,10 @@ const Home = () => {
           />
           <button
             type="submit"
-            className="w-24 h-12 border cursor-pointer flex justify-center items-center bg-gray-100"
+            className="w-24 h-12 border cursor-pointer flex justify-center items-center bg-blue-600"
           >
             <svg
-              className="w-6 h-6 text-gray-800 dark:text-white"
+              className="w-6 h-6 text-white dark:text-white"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               width={24}
@@ -258,7 +259,6 @@ const Home = () => {
       <div className="sm:w-full  md:w-3/4  mx-auto ">
         <BarChart chartData={chartData} />
       </div>
-
     </>
   );
 };

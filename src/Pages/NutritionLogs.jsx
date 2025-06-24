@@ -82,7 +82,7 @@ const NutritionLogs = () => {
     }
   };
   return (
-    <div className="sm:grid md:flex md:grid-cols-2 lg:flex lg:grid-cols-4 gap-3">
+    <div className="sm:grid md:flex md:grid-cols-2 lg:flex lg:grid-cols-4 mt-3 mb-3 gap-3">
       {nutritionLogs
         .map((logs, index) => {
           return (
@@ -126,7 +126,7 @@ const NutritionLogs = () => {
               </h1>
               <h1 className="text-xl font-bold">
                 <span className="text-xl font-medium ">Date : </span>
-                {logs.createdAt}
+                {logs.createdAt.split('T')[0]}
               </h1>
               <div className="flex justify-end gap-3">
                 {/* Open the modal using document.getElementById('ID').showModal() method */}
