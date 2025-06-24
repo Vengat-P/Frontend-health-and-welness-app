@@ -15,10 +15,10 @@ const SetGoal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/goal/create", userData, {
+      await axios.post("http://localhost:5000/api/goals/create", userData, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
-        navigate("/home");
+      navigate("/home");
     } catch (error) {
       toast.error("error in create goal ");
     }
@@ -30,7 +30,7 @@ const SetGoal = () => {
         className="bg-white/60 backdrop-blur-md shadow-xl rounded-xl p-10 w-full max-w-md border border-white/40"
       >
         <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
-          Create your Goal 
+          Create your Goal
         </h2>
         <input
           type="text"
