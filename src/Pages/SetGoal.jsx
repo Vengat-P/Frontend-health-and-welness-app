@@ -15,7 +15,7 @@ const SetGoal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/goals/create", userData, {
+      await axios.post("https://fit2go-app.onrender.com/api/goals/create", userData, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       navigate("/home");

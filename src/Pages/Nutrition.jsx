@@ -21,7 +21,7 @@ const Nutrition = () => {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost:5000/api/nutritions/create",
+        "https://fit2go-app.onrender.com/api/nutritions/create",
         userData,
         { headers: { Authorization: `Bearer ${user.token}` } }
       );

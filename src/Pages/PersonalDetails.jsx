@@ -15,7 +15,7 @@ const PersonalDetails = () => {
   }, [user,navigate]);
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/auth/getUser", {
+      const res = await axios.get("https://fit2go-app.onrender.com/api/auth/getUser", {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       setUserData(res.data.data);
@@ -26,7 +26,7 @@ const PersonalDetails = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/auth/update/${userData._id}`, userData, {
+      await axios.put(`https://fit2go-app.onrender.com/api/auth/update/${userData._id}`, userData, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
     

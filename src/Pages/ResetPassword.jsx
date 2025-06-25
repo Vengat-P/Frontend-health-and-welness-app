@@ -12,7 +12,7 @@ const ResetPassword = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/auth/reset-password/${id}/${token}`,
+        `https://fit2go-app.onrender.com/api/auth/reset-password/${id}/${token}`,
         {
           password,
         }

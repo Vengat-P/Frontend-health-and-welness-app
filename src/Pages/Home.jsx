@@ -40,18 +40,18 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const res1 = await axios.get(
-        "http://localhost:5000/api/fitnesses/getfitnesslogs",
+        "https://fit2go-app.onrender.com/api/fitnesses/getfitnesslogs",
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }
       );
       const res2 = await axios.get(
-        "http://localhost:5000/api/nutritions/getnutritionlogs",
+        "https://fit2go-app.onrender.com/api/nutritions/getnutritionlogs",
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }
       );
-      const res3 = await axios.get("http://localhost:5000/api/auth/getUser", {
+      const res3 = await axios.get("https://fit2go-app.onrender.com/api/auth/getUser", {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       setLoading(false);

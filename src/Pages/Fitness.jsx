@@ -16,7 +16,7 @@ const Fitness = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/fitnesses/create", userData, {
+      await axios.post("https://fit2go-app.onrender.com/api/fitnesses/create", userData, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
       toast.success("fitness log creates Succesfully");

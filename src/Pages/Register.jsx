@@ -16,7 +16,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/auth/register", userData);
+      await axios.post("https://fit2go-app.onrender.com/api/auth/register", userData);
       toast.success("User Registered Succesfully");
       navigate("/login");
     } catch (error) {

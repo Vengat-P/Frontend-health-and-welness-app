@@ -17,13 +17,13 @@ const Goal = () => {
   const fetchData = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/goals/getallgoals",
+        "https://fit2go-app.onrender.com/api/goals/getallgoals",
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }
       );
       const res2 = await axios.get(
-        "http://localhost:5000/api/autogoal/getallgoals",
+        "https://fit2go-app.onrender.com/api/autogoal/getallgoals",
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }
@@ -46,13 +46,13 @@ const Goal = () => {
     document.getElementById("my_modal_1").showModal();
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/goals/getlog/${id}`,
+        `https://fit2go-app.onrender.com/api/goals/getlog/${id}`,
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }
       );
       const res2 = await axios.get(
-        `http://localhost:5000/api/autogoal/getlog/${id}`,
+        `https://fit2go-app.onrender.com/api/autogoal/getlog/${id}`,
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }
@@ -67,14 +67,14 @@ const Goal = () => {
     e.preventDefault();
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/goals/update/${id}`,
+        `https://fit2go-app.onrender.com/api/goals/update/${id}`,
         newGoalLog,
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }
       );
       const res2 = await axios.put(
-        `http://localhost:5000/api/autogoal/update/${id}`,
+        `https://fit2go-app.onrender.com/api/autogoal/update/${id}`,
         newGoalLog,
         {
           headers: { Authorization: `Bearer ${user.token}` },
@@ -95,7 +95,7 @@ const Goal = () => {
   const handleDelete = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:5000/api/goals/delete/${id}`,
+        `https://fit2go-app.onrender.com/api/goals/delete/${id}`,
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }

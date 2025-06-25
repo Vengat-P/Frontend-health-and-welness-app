@@ -15,7 +15,7 @@ const NutritionLogs = () => {
   const fetchData = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/nutritions/getnutritionlogs",
+        "https://fit2go-app.onrender.com/api/nutritions/getnutritionlogs",
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }
@@ -37,7 +37,7 @@ const NutritionLogs = () => {
     document.getElementById("my_modal_1").showModal();
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/nutritions/getlog/${id}`,
+        `https://fit2go-app.onrender.com/api/nutritions/getlog/${id}`,
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }
@@ -51,7 +51,7 @@ const NutritionLogs = () => {
     e.preventDefault();
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/nutritions/update/${id}`,
+        `https://fit2go-app.onrender.com/api/nutritions/update/${id}`,
         newNutritionLog,
         {
           headers: { Authorization: `Bearer ${user.token}` },
@@ -78,7 +78,7 @@ const NutritionLogs = () => {
   const handleDelete = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:5000/api/nutritions/delete/${id}`,
+        `https://fit2go-app.onrender.com/api/nutritions/delete/${id}`,
         {
           headers: { Authorization: `Bearer ${user.token}` },
         }
