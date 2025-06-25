@@ -10,6 +10,7 @@ const Home = () => {
   const [nutritionLogs, setNutritionLogs] = useState([]);
   const [fitnessLogs, setFitnessLogs] = useState([]);
   const [userData, setUserData] = useState({});
+  const [loading, setLoading] = useState(true);
   //set date ranges to show chart
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -53,6 +54,7 @@ const Home = () => {
       const res3 = await axios.get("http://localhost:5000/api/auth/getUser", {
         headers: { Authorization: `Bearer ${user.token}` },
       });
+      setLoading(false);
       setUserData(res3.data.data);
       setFitnessLogs(res1.data.data);
       setNutritionLogs(res2.data.data);
@@ -107,6 +109,13 @@ const Home = () => {
       console.log(error);
     }
   };
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center">
+        <span className="loading loading-spinner text-info"></span>
+      </div>
+    );
+  }
   const handleLocate = () => {
     navigate("/personaldetails");
   };
@@ -222,7 +231,10 @@ const Home = () => {
         </button>
       </div>
       <div className="flex  justify-center mt-2 ">
-        <form onSubmit={handleSubmit} className="sm:grid md:flex gap-2 justify-center">
+        <form
+          onSubmit={handleSubmit}
+          className="sm:grid md:flex gap-2 justify-center"
+        >
           <input
             type="date"
             className="w-full p-3 mb-4 border cursor-pointer border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"

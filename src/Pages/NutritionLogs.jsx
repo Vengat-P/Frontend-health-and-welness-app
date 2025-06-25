@@ -7,6 +7,7 @@ const NutritionLogs = () => {
   const { user } = useContext(UserContext);
   const [nutritionLogs, setNutritionLogs] = useState([]);
   const [newNutritionLog, setNewNutritionLog] = useState({});
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     fetchData();
@@ -19,11 +20,19 @@ const NutritionLogs = () => {
           headers: { Authorization: `Bearer ${user.token}` },
         }
       );
+      setLoading(false);
       setNutritionLogs(res.data.data);
     } catch (error) {
       console.log(error);
     }
   };
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center">
+        <span className="loading loading-spinner text-info"></span>
+      </div>
+    );
+  }
   const handleEdit = async (id) => {
     document.getElementById("my_modal_1").showModal();
     try {
@@ -126,7 +135,7 @@ const NutritionLogs = () => {
               </h1>
               <h1 className="text-xl font-bold">
                 <span className="text-xl font-medium ">Date : </span>
-                {logs.createdAt.split('T')[0]}
+                {logs.createdAt.split("T")[0]}
               </h1>
               <div className="flex justify-end gap-3">
                 {/* Open the modal using document.getElementById('ID').showModal() method */}

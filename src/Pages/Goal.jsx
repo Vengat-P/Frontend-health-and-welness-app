@@ -9,6 +9,7 @@ const Goal = () => {
   const [goals, setGoals] = useState([]);
   const [todayGoal, setTodayGoal] = useState([]);
   const [newGoalLog, setNewGoalLog] = useState({});
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
     fetchData();
@@ -27,12 +28,20 @@ const Goal = () => {
           headers: { Authorization: `Bearer ${user.token}` },
         }
       );
+      setLoading(false);
       setTodayGoal(res2.data.data);
       setGoals(res.data.data);
     } catch (error) {
       console.log(error);
     }
   };
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center">
+        <span className="loading loading-spinner text-info"></span>
+      </div>
+    );
+  }
   const handleEdit = async (id) => {
     document.getElementById("my_modal_1").showModal();
     try {
@@ -212,7 +221,7 @@ const Goal = () => {
           })
           .reverse()}
       </div>
-      <h1 className=" text-2xl font-semibold">Today Goal</h1>
+      <h1 className=" text-2xl font-semibold">Daily Goal</h1>
       <div className="sm:grid md:flex md:grid-cols-2 lg:flex lg:grid-cols-4 mt-3 mb-3 gap-3">
         {todayGoal
           .map((item, index) => {
