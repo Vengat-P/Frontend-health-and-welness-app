@@ -64,7 +64,7 @@ const Home = () => {
         ),
         datasets: [
           {
-            label: "Calories burn(Your rest mode BMR + fitnesslog activities)",
+            label: "Calories burn(BMR per day + fitness activities)",
             data: datesRange.map((date) => {
               const match = fitnessLogs.map((log) => {
                 if (
