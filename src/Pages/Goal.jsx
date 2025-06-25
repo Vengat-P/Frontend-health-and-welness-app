@@ -109,7 +109,7 @@ const Goal = () => {
   };
   return (
     <>
-      <div className="sm:grid md:flex md:grid-cols-2 lg:flex lg:grid-cols-4 mt-3 mb-3 gap-3">
+      <div className="sm:grid md:grid md:grid-cols-2 lg:grid lg:grid-cols-4 mt-3 mb-3 gap-3">
         {goals
           .map((logs, index) => {
             return (
@@ -222,7 +222,7 @@ const Goal = () => {
           .reverse()}
       </div>
       <h1 className=" text-2xl font-semibold">Daily Goal</h1>
-      <div className="sm:grid md:flex md:grid-cols-2 lg:flex lg:grid-cols-4 mt-3 mb-3 gap-3">
+      <div className="sm:grid md:grid md:grid-cols-2 lg:grid lg:grid-cols-4 mt-3 mb-3 gap-3">
         {todayGoal
           .map((item, index) => {
             return (
