@@ -144,7 +144,7 @@ const Home = () => {
   // console.log(datesRange);
   return (
     <>
-      <div className="sm:grid  md:flex justify-around  border-2 mt-3 p-4 mx-auto my-auto shadow-lg">
+      <div className="grid gap-4 md:flex justify-around  border-2 mt-3 p-4 mx-auto my-auto shadow-lg">
         <button
           type="button"
           onClick={handleLocate}
