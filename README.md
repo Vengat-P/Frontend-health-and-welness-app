@@ -14,7 +14,7 @@ Develop an app focused on health and wellness with features for fitness tracking
 - **flowbite** for icons
 - **Chartjs** to visual chart
 - **React-Router-dom** for acessing routers(pacakge)
-- **recat-chartjs-2** for chart visualization
+- **reactt-chartjs-2** for chart visualization
 - **VSCode** for development
 - **JavaScript** for applying logics
 
