@@ -133,7 +133,7 @@ const Home = () => {
       while (currentDate <= endDate) {
         dates.push(new Date(currentDate));
         currentDate.setDate(currentDate.getDate() + 1);
-        console.log(currentDate);
+        // console.log(currentDate);
       }
       setDatesRange(dates);
       console.log(dates);
